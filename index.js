@@ -48,7 +48,7 @@ app.post("/email----slack", (req, res) => {
     return res.sendStatus(401);
   }
 
-  if (res.headers["X-Slack-Retry-Num"]) {
+  if (req.headers["X-Slack-Retry-Num"]) {
     // This email has already been processed
     console.log("X-Slack-Retry-Num");
     return res.sendStatus(401);
