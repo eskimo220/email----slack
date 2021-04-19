@@ -78,7 +78,7 @@ app.post("/email----slack", (req, res) => {
     .post("https://slack.com/api/chat.postMessage", formData)
     .then((res) => {
       console.log(`statusCode: ${res.statusCode}`);
-      console.log(res.body);
+      console.log(res);
     })
     .catch((error) => {
       console.error(error);
