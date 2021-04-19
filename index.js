@@ -68,11 +68,16 @@ app.post("/email----slack", (req, res) => {
     toSend.text += "Please attention there is attachment file.";
   }
 
+  const formData = new FormData();
+  Object.keys(toSend).forEach((key) => {
+    formData.append(key, toSend[key])
+  });
+
   axios
-    .post("https://slack.com/api/chat.postMessage", toSend)
+    .post("https://slack.com/api/chat.postMessage", formData)
     .then((res) => {
       console.log(`statusCode: ${res.statusCode}`);
-      console.log(res);
+      console.log(res.body);
     })
     .catch((error) => {
       console.error(error);
