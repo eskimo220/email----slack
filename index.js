@@ -1,7 +1,6 @@
 const express = require("express");
 const helmet = require("helmet");
 const axios = require("axios");
-const FormData = require("form-data");
 
 const app = express();
 
@@ -69,13 +68,10 @@ app.post("/email----slack", (req, res) => {
     toSend.text += "Please attention there is attachment file.";
   }
 
-  const formData = new FormData();
-  Object.keys(toSend).forEach((key) => {
-    formData.append(key, String(toSend[key]))
-  });
-
   axios
-    .post("https://slack.com/api/chat.postMessage", formData)
+    .post("https://slack.com/api/chat.postMessage", toSend, {
+      headers: { "content-type": "application/json" },
+    })
     .then((res) => {
       console.log(`statusCode: ${res.statusCode}`);
       console.log(res);
