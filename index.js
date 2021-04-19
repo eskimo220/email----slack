@@ -57,7 +57,6 @@ app.post("/email----slack", (req, res) => {
   const email = body["event"]["files"][0];
 
   const toSend = {
-    token: process.env.USER_TOKEN,
     channel: process.env.SEND_TO_CHANNEL,
     text: `<${email.permalink}|has receive a email.>`,
     as_user: true,
@@ -70,7 +69,10 @@ app.post("/email----slack", (req, res) => {
 
   axios
     .post("https://slack.com/api/chat.postMessage", toSend, {
-      headers: { "content-type": "application/json" },
+      headers: {
+        "content-type": "application/json; charset=UTF-8",
+        Authorization: `Bearer ${process.env.USER_TOKEN}`,
+      },
     })
     .then((res) => {
       console.log(`statusCode: ${res.statusCode}`);
