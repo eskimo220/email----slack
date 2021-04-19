@@ -71,7 +71,7 @@ app.post("/email----slack", (req, res) => {
 
   const formData = new FormData();
   Object.keys(toSend).forEach((key) => {
-    formData.append(key, toSend[key])
+    formData.append(key, String(toSend[key]))
   });
 
   axios
