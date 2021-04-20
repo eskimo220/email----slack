@@ -1,15 +1,18 @@
 {
-  "name": "emailToSlack",
+  "name": "email----slack",
   "version": "1.0.0",
-  "description": "",
+  "description": "A tool for email forward to public slack channel.",
+  "author": "Wang haoqi <wanghaoqiitec@gmail.com>",
+  "license": "MIT",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "slack",
+    "email"
+  ],
   "dependencies": {
     "axios": "^0.21.1",
     "express": "^4.17.1",
