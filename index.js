@@ -7,9 +7,11 @@ const app = express();
 app.use(express.json());
 app.use(helmet());
 
-app.get("/", (req, res) => res.json({ message: "todo" }));
+app.get("/", (req, res) =>
+  res.redirect("https://github.com/eskimo220/email----slack")
+);
 
-app.post("/email----slack", (req, res) => {
+app.post("/", (req, res) => {
   console.log(`Email is comming.`);
 
   const body = req.body;
