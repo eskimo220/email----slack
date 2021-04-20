@@ -1,0 +1,31 @@
+{
+    "name": "email----slack",
+    "description": "A tool for email forward to public slack channel.",
+    "repository": "https://github.com/eskimo220/email----slack",
+    "logo": "https://node-js-sample.herokuapp.com/node.png",
+    "keywords": ["node", "express", "slack", "email"],
+    "addons": ["papertrail"],
+    "env": {
+        "APP_ID": {
+            "description": "You get this when you create the app."
+        },
+        "TEAM_ID": {
+            "description": "ID of your slack workspace."
+        },
+        "VERIFICATION_TOKEN": {
+            "description": "You get this when you create the app."
+        },
+        "USER_TOKEN": {
+            "description": "You get this on slack permission page."
+        },
+        "SEND_TO_CHANNEL": {
+            "description": "ID of your slack channel. Email will be sended to here."
+        },
+        "USLACKBOT_CHANNEL": {
+            "description": "The ID of the direct messaging channel between you and @slackbot"
+        },
+        "LOG_LEVEL": {
+            "value": "INFO"
+        }
+    }
+}
