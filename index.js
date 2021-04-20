@@ -44,7 +44,7 @@ app.post("/email----slack", (req, res) => {
 
   const hasErr = err.find((o) => !!o);
   if (hasErr) {
-    console.error(hasErr);
+    console.error(new Error(hasErr));
     return res.sendStatus(401);
   }
 
@@ -75,8 +75,10 @@ app.post("/email----slack", (req, res) => {
       },
     })
     .then((res) => {
-      console.log(`statusCode: ${res.status}`);
-      console.log(res.data);
+      if (res.status !== 200) {
+        console.log(`statusCode: ${res.status}`);
+        console.error(new Error(res.data));
+      }
     })
     .catch((error) => {
       console.error(error);
