@@ -65,7 +65,7 @@ app.post("/", (req, res) => {
     unfurl_links: true,
   };
 
-  if (email.attachments) {
+  if (email.attachments[0]) {
     toSend.text += "Please attention there is attachment file.";
   }
 
