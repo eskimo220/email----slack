@@ -5,6 +5,9 @@ Let the slack [free feature](https://slack.com/help/articles/360056298994-Send-e
 I was inspired by this [project](https://github.com/kossiitkgp/email-to-slack). Thanks to the author.
 https://github.com/kossiitkgp/email-to-slack
 
+## Preview
+![image](https://user-images.githubusercontent.com/12117930/115841883-d3ef9e80-a44f-11eb-882b-629803409e44.png)
+
 ## Key Features
 * stay slack free plan.
 * one click to deploy. (use Heroku Button)
