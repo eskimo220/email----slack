@@ -50,9 +50,9 @@ app.post("/", (req, res) => {
     return res.sendStatus(401);
   }
 
-  if (req.headers["X-Slack-Retry-Num"]) {
+  if (req.headers["x-slack-retry-num"]) {
     // This email has already been processed
-    console.log("X-Slack-Retry-Num");
+    console.log("x-slack-retry-num, skip it.");
     return res.sendStatus(401);
   }
 
