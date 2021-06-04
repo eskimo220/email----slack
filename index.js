@@ -60,7 +60,7 @@ app.post("/", (req, res) => {
 
   const toSend = {
     channel: process.env.SEND_TO_CHANNEL,
-    text: `<${email.permalink}|You have received a email.>`,
+    text: `<${email.permalink}|You have received an email.>`,
     as_user: true,
     unfurl_links: true,
   };
