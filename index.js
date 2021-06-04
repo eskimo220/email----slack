@@ -11,6 +11,20 @@ app.get("/", (req, res) =>
   res.redirect("https://github.com/eskimo220/email----slack")
 );
 
+const decodeChannel = function(email) {
+  const decode = process.env.DECODE && process.env.DECODE.split(",");
+  if (!decode[0]) {
+    return false;
+  }
+  const toAndCc = [...email.to, ...email.cc];
+  for (let i = 0; decode[i]; i += 2) {
+    const address = decode[i];
+    if (toAndCc.some((o) => o.address === address)) {
+      return decode[i + 1];
+    }
+  }
+};
+
 app.post("/", (req, res) => {
   console.log(`Email is comming.`);
 
@@ -62,7 +76,7 @@ app.post("/", (req, res) => {
   console.debug(email);
 
   const toSend = {
-    channel: process.env.SEND_TO_CHANNEL,
+    channel: decodeChannel(email) || process.env.SEND_TO_CHANNEL,
     text: `<${email.permalink}|You have received an email.>`,
     as_user: true,
     unfurl_links: true,
