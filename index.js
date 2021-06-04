@@ -58,6 +58,9 @@ app.post("/", (req, res) => {
 
   const email = body["event"]["files"][0];
 
+  // log email
+  console.debug(email);
+
   const toSend = {
     channel: process.env.SEND_TO_CHANNEL,
     text: `<${email.permalink}|You have received an email.>`,
