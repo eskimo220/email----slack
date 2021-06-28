@@ -13,9 +13,9 @@ app.get("/", (req, res) =>
 
 const decodeChannel = function(email) {
   const decode = process.env.DECODE && process.env.DECODE.split(",");
-  if (!decode[0]) {
-    return false;
-  }
+  if (!decode) return false;
+  if (!decode[0]) return false;
+
   const toAndCc = [...email.to, ...email.cc];
   for (let i = 0; decode[i]; i += 2) {
     const address = decode[i];
