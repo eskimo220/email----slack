@@ -98,16 +98,14 @@ app.post("/", (req, res) => {
         console.log(`statusCode: ${res.status}`);
         console.error(new Error(res.data));
       }
+      res.sendStatus(200);
     })
     .catch((error) => {
       console.error(error);
+      res.sendStatus(500);
     });
 
-  res.sendStatus(200);
+  
 });
 
-const port = process.env.PORT || 3000;
-
-app.listen(port, () => {
-  console.log(`Listening at http://localhost:${port}`);
-});
+module.exports = app

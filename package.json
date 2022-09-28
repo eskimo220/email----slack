@@ -5,20 +5,42 @@
   "author": "Wang haoqi <wanghaoqiitec@gmail.com>",
   "license": "MIT",
   "main": "index.js",
+  "config": {
+    "s3BucketName": "model-test",
+    "region": "ap-northeast-1",
+    "cloudFormationStackName": "ServerlessExpressStack",
+    "functionName": "",
+    "domain": ""
+  },
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+    "start": "node app.local.js",
+    "local": "node scripts/local",
+    "invoke-lambda": "cross-var aws lambda invoke --function-name $npm_package_config_functionName --region $npm_package_config_region --payload file://api-gateway-event.json lambda-invoke-response.json && cat lambda-invoke-response.json",
+    "create-bucket": "cross-var aws s3 mb s3://$npm_package_config_s3BucketName --region $npm_package_config_region",
+    "delete-bucket": "cross-var aws s3 rb s3://$npm_package_config_s3BucketName --region $npm_package_config_region",
+    "package": "cross-var aws cloudformation package --template ./sam-template.yaml --s3-bucket $npm_package_config_s3BucketName --output-template sam-template.packaged.yaml --region $npm_package_config_region",
+    "deploy": "cross-var aws cloudformation deploy --template-file sam-template.packaged.yaml --stack-name $npm_package_config_cloudFormationStackName --capabilities CAPABILITY_IAM --region $npm_package_config_region --parameter-overrides DomainName=$npm_package_config_domain",
+    "package-deploy": "npm run build && npm run package && npm run deploy",
+    "delete-stack": "cross-var aws cloudformation delete-stack --stack-name $npm_package_config_cloudFormationStackName --region $npm_package_config_region",
+    "setup": "npm install && (cross-var aws s3api get-bucket-location --bucket $npm_package_config_s3BucketName --region $npm_package_config_region || npm run create-bucket) && npm run package-deploy",
+    "build": "webpack-cli"
   },
   "keywords": [
     "slack",
     "email"
   ],
   "dependencies": {
+    "@vendia/serverless-express": "^4.3.0",
     "axios": "^0.21.1",
     "express": "^4.17.1",
     "helmet": "^4.5.0"
   },
   "devDependencies": {
+    "copy-webpack-plugin": "^7.0.0",
+    "cross-var": "^1.1.0",
+    "source-map-support": "^0.5.19",
+    "webpack": "^5.21.2",
+    "webpack-cli": "^4.5.0",
     "dotenv": "^8.2.0",
     "nodemon": "^2.0.7"
   }
