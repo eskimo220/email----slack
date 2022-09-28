@@ -93,10 +93,10 @@ app.post("/", (req, res) => {
         Authorization: `Bearer ${process.env.USER_TOKEN}`,
       },
     })
-    .then((res) => {
-      if (res.status !== 200) {
-        console.log(`statusCode: ${res.status}`);
-        console.error(new Error(res.data));
+    .then((resp) => {
+      if (resp.status !== 200) {
+        console.log(`statusCode: ${resp.status}`);
+        console.error(new Error(resp.data));
       }
       res.sendStatus(200);
     })
