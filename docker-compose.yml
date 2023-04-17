@@ -1,0 +1,10 @@
+# docker-compose.yml
+version: '3'
+services:
+  bolt:
+    build: .
+    tty: true
+    env_file:
+      - ./.env
+    ports:
+      - 3000:3000

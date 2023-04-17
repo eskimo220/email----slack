@@ -61,13 +61,13 @@ app.post("/", (req, res) => {
   const hasErr = err.find((o) => !!o);
   if (hasErr) {
     console.error(new Error(hasErr));
-    return res.sendStatus(401);
+    return res.sendStatus(200);
   }
 
   if (req.headers["x-slack-retry-num"]) {
     // This email has already been processed
     console.log("x-slack-retry-num, skip it.");
-    return res.sendStatus(401);
+    return res.sendStatus(200);
   }
 
   const email = body["event"]["files"][0];
