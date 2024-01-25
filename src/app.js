@@ -76,11 +76,15 @@ app.post("/", (req, res) => {
   console.debug(email);
 
   const toSend = {
-    channel: decodeChannel(email) || process.env.SEND_TO_CHANNEL,
+    channel: decodeChannel(email),
     text: `<${email.permalink}|You have received an email.>`,
     as_user: true,
     unfurl_links: true,
   };
+
+  if (!toSend.channel) {
+    return res.sendStatus(200);
+  }
 
   if (email.attachments[0]) {
     toSend.text += "Please attention there is attachment file.";
